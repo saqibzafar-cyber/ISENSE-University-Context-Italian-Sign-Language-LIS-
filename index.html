@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a2637">
+  <meta name="description" content="ISENSE Dataset — a sign-language research resource from the University of Tuscia. Learn about the dataset, its research use policy, and how to request access.">
+  <title>ISENSE Dataset | Sign Language Research</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #0b2b3e;
+      --navy-deep: #082333;
+      --teal: #087e79;
+      --green: #159957;
+      --blue: #155799;
+      --mint: #c6f2df;
+      --ink: #213747;
+      --muted: #5c6f7c;
+      --line: #dce7e9;
+      --paper: #ffffff;
+      --offwhite: #f5f9f9;
+      --soft: #e9f5f1;
+      --shadow: 0 16px 42px rgba(12,49,61,.08);
+      --max: 1160px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; background: var(--paper); font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: var(--ink); }
+    a { color: var(--blue); }
+    a:focus-visible { outline: 3px solid #ffc66b; outline-offset: 4px; border-radius: 3px; }
+    svg { max-width: 100%; }
+    .skip-link { position: absolute; top: -60px; left: 10px; padding: 9px 16px; background: white; color: var(--navy); z-index: 99; }
+    .skip-link:focus { top: 8px; }
+    .container { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; text-transform: uppercase; letter-spacing: .12em; font-size: .74rem; font-weight: 800; }
+    .eyebrow .dot { display: inline-block; width: 8px; height: 8px; background: #54d69d; border-radius: 99px; box-shadow: 0 0 0 4px rgba(84,214,157,.13); }
+    .site-header { background: var(--navy-deep); position: sticky; z-index: 30; top: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .nav-inner { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; color: #fff; flex: 0 0 auto; }
+    .brand-icon { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid rgba(122,255,212,.4); border-radius: 11px; background: rgba(77,211,166,.1); }
+    .brand-name { display: block; font-weight: 850; letter-spacing: .13em; font-size: 1.08rem; line-height: 1.15; }
+    .brand-sub { display: block; font-size: .66rem; color: #9dc6c9; letter-spacing: .08em; margin-top: 2px; }
+    .site-nav { display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
+    .site-nav a { color: #dae9ee; text-decoration: none; font-size: .88rem; font-weight: 650; white-space: nowrap; transition: color .15s ease; }
+    .site-nav a:hover { color: #82efd1; }
+    .site-nav .nav-pill { padding: 10px 17px; border: 1px solid rgba(140,235,203,.55); border-radius: 30px; color: #c9ffee; }
+    .site-nav .nav-pill:hover { background: rgba(115,240,194,.12); }
+
+    .hero { background: radial-gradient(ellipse 850px 430px at 80% 42%, rgba(31,143,135,.33), transparent 69%), radial-gradient(ellipse 580px 360px at 0% 80%, rgba(13,74,117,.7), transparent 75%), linear-gradient(115deg,#0b2d44 0%,#0b3545 52%,#0d4c50 100%); color: white; overflow: hidden; }
+    .hero-inner { display: grid; grid-template-columns: minmax(0,1.02fr) minmax(0,.98fr); align-items: center; gap: clamp(20px,5vw,72px); padding-top: clamp(62px,7vw,104px); padding-bottom: clamp(67px,7.2vw,106px); }
+    .hero .eyebrow { color: #a1ecce; }
+    .hero h1 { color: #fff; font-size: clamp(3.2rem,6vw,5.65rem); line-height: 1.05; letter-spacing: -.055em; margin: 23px 0 20px; font-weight: 800; }
+    .hero h1 span { color: #95efcf; }
+    .hero-lead { max-width: 660px; font-size: clamp(1.1rem,1.8vw,1.34rem); color: #deeff0; line-height: 1.65; margin: 0; }
+    .hero-origin { margin-top: 19px; padding-left: 15px; border-left: 2px solid #5dddba; font-size: .93rem; color: #b8d4d9; max-width: 540px; }
+    .btn-row { margin-top: 33px; display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; gap: 10px; align-items: center; justify-content: center; border-radius: 8px; text-decoration: none; padding: 13px 20px; font-size: .93rem; font-weight: 800; line-height: 1.3; min-height: 46px; transition: transform .17s ease, box-shadow .17s ease, background .17s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: #07342f; background: #a5efd2; box-shadow: 0 10px 24px rgba(4,25,30,.13); }
+    .btn-primary:hover { background: #bcf7e2; }
+    .btn-outline { color: #eefef8; border: 1px solid rgba(226,255,242,.55); background: rgba(255,255,255,.055); }
+    .btn-outline:hover { background: rgba(255,255,255,.14); }
+    .btn-dark { background: var(--navy); color: #fff; }
+    .btn-dark:hover { background: #16465b; }
+
+    .hero-visual { position: relative; width: 100%; max-width: 510px; justify-self: end; }
+    .visual-shadow { position: absolute; inset: 7% -4% -6% 9%; background: #48bba8; filter: blur(60px); opacity: .16; }
+    .visual-shell { position: relative; border: 1px solid rgba(177,246,230,.24); background: linear-gradient(152deg,rgba(223,255,252,.13),rgba(187,240,224,.04)); border-radius: 23px; padding: 18px; box-shadow: 0 30px 55px rgba(2,19,28,.19); backdrop-filter: blur(6px); }
+    .visual-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #d8efef; font-size: .78rem; font-weight: 700; margin-bottom: 14px; }
+    .visual-controls { display: flex; gap: 6px; }
+    .visual-controls i { background: #8cd6c9; opacity: .7; width: 7px; height: 7px; border-radius: 50%; }
+    .visual-screen { border: 1px solid rgba(145,230,217,.18); border-radius: 13px; overflow: hidden; background: #09293c; }
+    .visual-screen svg { width: 100%; display: block; height: auto; }
+    .visual-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; gap: 10px; color: #c8e5e8; font-size: .72rem; }
+    .chip { border: 1px solid rgba(131,245,205,.3); padding: 6px 10px; color: #c9f4e7; border-radius: 999px; font-size: .67rem; font-weight: 750; letter-spacing: .02em; }
+    .visual-caption { color: #d7e9eb; text-align: center; font-size: .73rem; opacity: .83; margin-top: 13px; }
+
+    .summary-bar { background: #f0f8f6; border-bottom: 1px solid #dfeeea; }
+    .summary-grid { padding: 19px 0; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 0; }
+    .summary-cell { padding: 7px 22px; border-right: 1px solid #d0e7e0; }
+    .summary-cell:first-child { padding-left: 0; }
+    .summary-cell:last-child { border: 0; }
+    .summary-k { display: block; color: #52726d; font-weight: 750; text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; }
+    .summary-v { display: block; color: #193f42; font-size: .96rem; line-height: 1.35; font-weight: 800; padding-top: 4px; }
+
+    .section { padding-block: 86px; }
+    .section.soft { background: var(--offwhite); }
+    .section-top { max-width: 720px; margin-bottom: 36px; }
+    .section-kicker { text-transform: uppercase; color: var(--teal); font-weight: 850; letter-spacing: .13em; font-size: .73rem; }
+    .section h2 { font-size: clamp(1.85rem,3.2vw,2.55rem); line-height: 1.18; color: #173a49; letter-spacing: -.035em; margin: 9px 0 15px; }
+    .section p { color: var(--muted); margin: 0 0 17px; }
+    .section-intro { font-size: 1.055rem; max-width: 730px; }
+    .two-col { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: clamp(24px,5vw,80px); align-items: start; }
+    .feature-list { display: grid; gap: 14px; margin-top: 28px; }
+    .feature { display: flex; align-items: flex-start; gap: 13px; }
+    .check-icon { flex: 0 0 25px; display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; background: #ddf5ea; color: #087f60; margin-top: 3px; }
+    .feature strong { display: block; color: #233f48; font-size: .93rem; }
+    .feature span { display: block; color: var(--muted); font-size: .91rem; }
+    .aside-card { border: 1px solid var(--line); border-radius: 17px; padding: clamp(22px,3vw,30px); box-shadow: var(--shadow); background: white; }
+    .aside-card h3 { margin: 0 0 14px; color: #173c44; font-size: 1.12rem; }
+    .detail-row { padding: 13px 0; border-bottom: 1px solid #eaf0f0; }
+    .detail-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .detail-label { display: block; color: var(--teal); text-transform: uppercase; letter-spacing: .09em; font-size: .69rem; font-weight: 800; }
+    .detail-value { display: block; color: #41535b; margin-top: 4px; font-size: .93rem; }
+    .edit-note { display: flex; align-items: flex-start; gap: 9px; margin-top: 17px; font-size: .78rem; color: #607880; background: #f3f7f7; padding: 11px 12px; border-radius: 8px; }
+
+    .cards-3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+    .info-card { border: 1px solid #dfebeb; background: #fff; padding: 27px; border-radius: 15px; box-shadow: 0 9px 20px rgba(10,48,56,.025); }
+    .card-icon { width: 47px; height: 47px; border-radius: 13px; display: grid; place-items: center; background: #e2f5ee; color: #087f67; margin-bottom: 20px; }
+    .info-card h3 { margin: 0 0 10px; font-size: 1.08rem; color: #193f47; }
+    .info-card p { margin: 0; font-size: .94rem; }
+    .use-card { position: relative; overflow: hidden; }
+    .use-card:after { content: ""; position: absolute; width: 70px; height: 4px; border-radius: 9px; bottom: 0; left: 27px; background: linear-gradient(90deg,#159957,#0e7890); }
+
+    .steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; counter-reset: reqstep; }
+    .step { position: relative; padding: 29px 25px 27px; background: #fff; border: 1px solid #dfe9ea; border-radius: 15px; }
+    .step-num { color: #087f69; background: #e2f6ec; border-radius: 12px; display: inline-grid; place-items: center; width: 43px; height: 43px; font-size: 1rem; font-weight: 850; margin-bottom: 20px; }
+    .step h3 { color: #173a46; margin: 0 0 8px; font-size: 1.06rem; }
+    .step p { font-size: .92rem; margin: 0; }
+    .access-panel { display: flex; align-items: center; justify-content: space-between; gap: 25px; margin-top: 23px; border: 1px solid #cce7df; background: #e6f5f0; padding: 23px 27px; border-radius: 14px; }
+    .access-panel h3 { margin: 0 0 4px; font-size: 1.08rem; color: #154b47; }
+    .access-panel p { margin: 0; font-size: .9rem; color: #47736c; }
+    .access-panel .btn { flex: 0 0 auto; }
+
+    .license-box { border-radius: 19px; background: linear-gradient(120deg,#0c3346,#0a5251); padding: clamp(29px,5vw,46px); color: #fff; display: grid; grid-template-columns: 1.3fr .7fr; gap: 32px; align-items: center; }
+    .license-box .section-kicker { color: #a5ecd1; }
+    .license-box h2 { color: #fff; margin: 8px 0 14px; }
+    .license-box p { color: #d4eaec; font-size: .95rem; margin-bottom: 19px; }
+    .policy-points { list-style: none; padding: 0; margin: 0; display: grid; gap: 15px; }
+    .policy-points li { display: flex; align-items: flex-start; gap: 12px; color: #e5f4f0; font-size: .91rem; }
+    .policy-points .bullet { flex: 0 0 22px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: #042a29; background: #b9eed9; font-weight: 850; font-size: .77rem; line-height: 1; }
+    .license-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+    .license-clarify { color: #cfebeb; font-size: .78rem; margin-top: 16px; }
+
+    .citation-inner { padding: 24px 28px; border: 1px dashed #a9c9c5; border-radius: 13px; background: #f8fbfa; }
+    .citation-inner h3 { margin: 0 0 7px; color: #164e4e; font-size: 1.03rem; }
+    .citation-inner p { margin: 0; font-size: .94rem; }
+    .citation-inner code { display: block; margin-top: 14px; white-space: normal; color: #48636c; font-size: .89rem; }
+    .team-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+    .person { background: white; border: 1px solid #dfe9e8; padding: 24px 24px 21px; border-radius: 13px; display: flex; align-items: center; gap: 16px; }
+    .avatar { width: 50px; height: 50px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 15px; background: linear-gradient(135deg,#e3f5ef,#dbeaf2); color: #0e736f; font-size: .92rem; font-weight: 850; }
+    .person h3 { font-size: 1rem; line-height: 1.45; margin: 0; color: #193d49; }
+    .person span { color: var(--muted); font-size: .82rem; }
+    .affiliation { padding: 18px 22px; margin-top: 20px; border-left: 3px solid #149c75; background: #edf7f3; color: #385a5a; font-size: .94rem; border-radius: 0 10px 10px 0; }
+    .contact-panel { display: grid; grid-template-columns: 1fr auto; gap: 26px; align-items: center; border: 1px solid #dcebe9; border-radius: 17px; padding: 35px; }
+    .contact-panel h2 { margin: 0 0 10px; font-size: 1.8rem; }
+    .contact-panel p { margin: 0; font-size: .96rem; }
+    .contact-panel a.email { color: #076d76; font-weight: 750; overflow-wrap: anywhere; }
+    .site-footer { background: #0a2938; color: #c3d8dc; padding: 28px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 22px; font-size: .84rem; }
+    .footer-inner a { color: #b8f0d9; text-decoration: none; }
+    .footer-inner a:hover { text-decoration: underline; }
+    .footer-links { display: flex; align-items: center; gap: 20px; }
+    @media (max-width: 980px) {
+      .site-nav { gap: 13px; }
+      .site-nav a { font-size: .8rem; }
+      .hero-inner { gap: 24px; }
+      .cards-3 { gap: 12px; }
+      .info-card { padding: 21px; }
+      .person { padding: 17px 14px; gap: 10px; }
+    }
+    @media (max-width: 780px) {
+      .nav-inner { flex-wrap: wrap; padding-block: 12px; gap: 12px; }
+      .site-nav { width: 100%; overflow-x: auto; padding-bottom: 3px; scrollbar-width: thin; justify-content: space-between; }
+      .hero-inner { grid-template-columns: 1fr; padding-top: 57px; padding-bottom: 62px; }
+      .hero-visual { max-width: 500px; justify-self: center; width: min(100%,500px); margin-top: 12px; }
+      .summary-grid { grid-template-columns: repeat(2,1fr); }
+      .summary-cell:nth-child(2) { border: 0; }
+      .summary-cell:nth-child(-n+2) { border-bottom: 1px solid #d0e7e0; padding-bottom: 15px; }
+      .summary-cell:nth-child(n+3) { padding-top: 15px; }
+      .summary-cell:nth-child(3) { padding-left: 0; }
+      .two-col, .license-box { grid-template-columns: 1fr; }
+      .cards-3, .steps, .team-grid { grid-template-columns: 1fr; }
+      .info-card { padding: 24px; }
+      .contact-panel { grid-template-columns: 1fr; }
+      .section { padding-block: 67px; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(calc(100% - 36px), var(--max)); }
+      .site-nav .nav-pill { padding: 6px 11px; }
+      .hero h1 { font-size: 3.14rem; }
+      .hero-lead { font-size: 1.08rem; }
+      .hero-inner { padding-top: 46px; }
+      .btn-row { align-items: stretch; }
+      .btn-row .btn { width: 100%; }
+      .summary-v { font-size: .85rem; }
+      .summary-cell { padding-inline: 12px; }
+      .access-panel { display: block; }
+      .access-panel .btn { margin-top: 18px; width: 100%; }
+      .license-box { padding: 25px 22px; }
+      .license-actions .btn { width: 100%; }
+      .footer-inner { align-items: start; flex-direction: column; }
+      .person { padding: 20px; }
+      .contact-panel { padding: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a class="brand" href="./" aria-label="ISENSE Dataset — home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 17.5 9 6l4 8 3-6 4 9.5" stroke="#9af1d2" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="9" cy="6" r="1.7" fill="#9af1d2"/><circle cx="16" cy="8" r="1.7" fill="#9af1d2"/></svg>
+        </span>
+        <span><span class="brand-name">ISENSE</span><span class="brand-sub">SIGN LANGUAGE DATASET</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#overview">Overview</a>
+        <a href="#dataset">Dataset</a>
+        <a href="#access">Access</a>
+        <a href="#team">Team</a>
+        <a class="nav-pill" href="license.html">License &amp; privacy ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Sign language research resource</div>
+          <h1 id="hero-title">ISENSE <span>Dataset</span></h1>
+          <p class="hero-lead">Supporting research in visual sign language understanding, computer vision, and machine learning.</p>
+          <p class="hero-origin">A research dataset from the Laboratorio di Misure Industriali e Biomeccanica Sperimentale, University of Tuscia, Italy.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#access">Request dataset access <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="license.html">View license &amp; disclaimer <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Illustration of a conceptual visual recognition pipeline">
+          <div class="visual-shadow"></div>
+          <div class="visual-shell">
+            <div class="visual-top"><span>VISUAL DATA • RESEARCH PIPELINE</span><span class="visual-controls" aria-hidden="true"><i></i><i></i><i></i></span></div>
+            <div class="visual-screen">
+              <svg role="img" aria-label="Illustrative sequence of abstract motion trajectories and connected keypoints" viewBox="0 0 590 380" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#103f53"/><stop offset="1" stop-color="#092d41"/></linearGradient>
+                  <linearGradient id="aqua" x1="0" x2="1"><stop stop-color="#62e1c6"/><stop offset="1" stop-color="#a7f3d0"/></linearGradient>
+                </defs>
+                <rect width="590" height="380" fill="url(#panel)"/>
+                <g opacity=".13" stroke="#a5e9da" stroke-width="1">
+                  <path d="M0 47H590M0 94H590M0 141H590M0 188H590M0 235H590M0 282H590M0 329H590"/>
+                  <path d="M49 0V380M98 0V380M147 0V380M196 0V380M245 0V380M294 0V380M343 0V380M392 0V380M441 0V380M490 0V380M539 0V380"/>
+                </g>
+                <rect x="37" y="34" width="331" height="258" rx="16" fill="#0b3548" stroke="#5fa9a9" stroke-opacity=".55"/>
+                <g stroke="#9eedda" stroke-width="6" stroke-linecap="round" fill="none" stroke-linejoin="round">
+                  <path d="M193 246L178 208L152 179L136 144L137 119"/>
+                  <path d="M178 208L213 183L228 142L226 105"/>
+                  <path d="M213 183L245 160L259 127L255 90"/>
+                  <path d="M245 160L274 171L305 146L314 117"/>
+                  <path d="M274 171L296 204L312 220"/>
+                </g>
+                <g fill="#d4fff2" stroke="#53d8bc" stroke-width="3">
+                  <circle cx="193" cy="246" r="8"/><circle cx="178" cy="208" r="7"/><circle cx="152" cy="179" r="6"/><circle cx="136" cy="144" r="6"/><circle cx="137" cy="119" r="6"/>
+                  <circle cx="213" cy="183" r="7"/><circle cx="228" cy="142" r="6"/><circle cx="226" cy="105" r="6"/>
+                  <circle cx="245" cy="160" r="6"/><circle cx="259" cy="127" r="6"/><circle cx="255" cy="90" r="6"/>
+                  <circle cx="274" cy="171" r="6"/><circle cx="305" cy="146" r="6"/><circle cx="314" cy="117" r="6"/>
+                  <circle cx="296" cy="204" r="6"/><circle cx="312" cy="220" r="6"/>
+                </g>
+                <path d="M90 266c20-14 38-20 61-25" stroke="#52b8b4" stroke-dasharray="3 9" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <g transform="translate(394 52)">
+                  <rect width="157" height="79" rx="12" fill="#194e5b" stroke="#3d8b91"/>
+                  <text x="16" y="24" fill="#a6d7d6" font-size="11" font-family="Arial" font-weight="700" letter-spacing="1.2">INPUT</text>
+                  <path d="M16 51h125" stroke="#3b8794" stroke-width="2"/><path d="M16 51l28-12 21 18 22-13 25 10 29-13" stroke="#a6edcf" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+                </g>
+                <g transform="translate(394 146)">
+                  <rect width="157" height="79" rx="12" fill="#194e5b" stroke="#3d8b91"/>
+                  <text x="16" y="24" fill="#a6d7d6" font-size="11" font-family="Arial" font-weight="700" letter-spacing="1.2">FEATURES</text>
+                  <g fill="#8fe9d2"><rect x="16" y="42" width="12" height="20" rx="3" opacity=".5"/><rect x="35" y="33" width="12" height="29" rx="3"/><rect x="54" y="49" width="12" height="13" rx="3" opacity=".65"/><rect x="73" y="28" width="12" height="34" rx="3"/><rect x="92" y="42" width="12" height="20" rx="3" opacity=".65"/><rect x="111" y="37" width="12" height="25" rx="3"/></g>
+                </g>
+                <g transform="translate(394 240)">
+                  <rect width="157" height="79" rx="12" fill="#194e5b" stroke="#3d8b91"/>
+                  <text x="16" y="24" fill="#a6d7d6" font-size="11" font-family="Arial" font-weight="700" letter-spacing="1.2">ANALYSIS</text>
+                  <rect x="16" y="41" width="123" height="20" rx="10" fill="#0b3d4f"/><rect x="16" y="41" width="96" height="20" rx="10" fill="url(#aqua)" opacity=".95"/>
+                </g>
+                <g stroke="#71d9bc" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M370 184h19m-6-6 6 6-6 6"/></g>
+                <text x="37" y="334" fill="#a9dcda" font-size="12" font-family="Arial" letter-spacing="1">SIGNAL  →  FEATURES  →  INSIGHT</text>
+              </svg>
+            </div>
+            <div class="visual-bottom"><span>Research workflow illustration</span><span class="chip">CONCEPTUAL</span></div>
+          </div>
+          <div class="visual-caption">Illustration only — not an image from the ISENSE Dataset.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="summary-bar" aria-label="Dataset use summary">
+      <div class="container summary-grid">
+        <div class="summary-cell"><span class="summary-k">Focus</span><span class="summary-v">Sign language research</span></div>
+        <div class="summary-cell"><span class="summary-k">Methods</span><span class="summary-v">Computer vision &amp; AI</span></div>
+        <div class="summary-cell"><span class="summary-k">Access</span><span class="summary-v">By approval</span></div>
+        <div class="summary-cell"><span class="summary-k">Use policy</span><span class="summary-v">Non-commercial research</span></div>
+      </div>
+    </div>
+
+    <section class="section" id="overview">
+      <div class="container two-col">
+        <div>
+          <div class="section-kicker">01 / About the project</div>
+          <h2>Researching sign language through visual data</h2>
+          <p class="section-intro">The ISENSE Dataset is a sign-language research resource associated with the University of Tuscia. Its website provides a central place for researchers to learn about the dataset, review the conditions of use, and request authorized access.</p>
+          <p>ISENSE is intended to support computational research, including studies involving computer vision, machine learning, and sign-language recognition. Specific dataset characteristics and scientific results should be documented in the accompanying dataset paper and technical documentation.</p>
+          <div class="feature-list">
+            <div class="feature"><span class="check-icon" aria-hidden="true">✓</span><div><strong>Research-oriented access</strong><span>Available to approved researchers under the published usage terms.</span></div></div>
+            <div class="feature"><span class="check-icon" aria-hidden="true">✓</span><div><strong>Original data preserved</strong><span>Separate preprocessing copies are permitted for authorized research; originals remain unchanged.</span></div></div>
+            <div class="feature"><span class="check-icon" aria-hidden="true">✓</span><div><strong>Privacy-aware sharing</strong><span>Participant images and videos are not provided as public downloads on this page.</span></div></div>
+          </div>
+        </div>
+        <aside class="aside-card" aria-labelledby="highlights-title">
+          <h3 id="highlights-title">Dataset at a glance</h3>
+          <div class="detail-row"><span class="detail-label">Dataset name</span><span class="detail-value">ISENSE Dataset</span></div>
+          <div class="detail-row"><span class="detail-label">Research field</span><span class="detail-value">Sign language analysis and recognition</span></div>
+          <div class="detail-row"><span class="detail-label">Dataset language / sign vocabulary</span><span class="detail-value">[Add supported sign language and vocabulary details]</span></div>
+          <div class="detail-row"><span class="detail-label">Participants / samples</span><span class="detail-value">[Add approved summary and sample counts]</span></div>
+          <div class="detail-row"><span class="detail-label">Version / release</span><span class="detail-value">[Add dataset version and release date]</span></div>
+          <div class="edit-note"><span aria-hidden="true">✎</span><span>Items in square brackets are placeholders. Replace them with verified details before public release.</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section soft" id="dataset">
+      <div class="container">
+        <div class="section-top"><div class="section-kicker">02 / Research applications</div><h2>Built for computational research</h2><p class="section-intro">The resource is intended to facilitate responsible investigations of visual sign language data. The examples below describe possible research applications, not benchmark results.</p></div>
+        <div class="cards-3">
+          <article class="info-card use-card"><span class="card-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 8 6 4-6 4z"/></svg></span><h3>Sign language recognition</h3><p>Investigate models and methods for recognizing or analyzing signed communication from visual data.</p></article>
+          <article class="info-card use-card"><span class="card-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4v16M12 4v16M19 4v16"/><circle cx="5" cy="7" r="2" fill="#e2f5ee"/><circle cx="12" cy="15" r="2" fill="#e2f5ee"/><circle cx="19" cy="9" r="2" fill="#e2f5ee"/></svg></span><h3>Computer vision and AI</h3><p>Develop and evaluate computational approaches, feature representations, and machine learning systems.</p></article>
+          <article class="info-card use-card"><span class="card-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.6 8.9 8 11 4.4-2.1 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>Responsible evaluation</h3><p>Study research performance while respecting participant privacy, provenance, and permitted data use.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="access">
+      <div class="container">
+        <div class="section-top"><div class="section-kicker">03 / Dataset access</div><h2>Request access for your research</h2><p class="section-intro">ISENSE is not offered as an unrestricted public download. Researchers should review the license and contact the dataset team before receiving access.</p></div>
+        <div class="steps">
+          <article class="step"><span class="step-num">01</span><h3>Read the usage terms</h3><p>Review the ISENSE License and Disclaimer, including research-only use, original-data integrity, and privacy rules.</p></article>
+          <article class="step"><span class="step-num">02</span><h3>Submit a request</h3><p>Email your name, institution, institutional email, research project, and intended use of the dataset.</p></article>
+          <article class="step"><span class="step-num">03</span><h3>Receive a decision</h3><p>The authorized dataset provider reviews requests and determines whether access can be granted under the applicable agreement.</p></article>
+        </div>
+        <div class="access-panel">
+          <div><h3>Interested in using ISENSE?</h3><p>Start with a short description of your planned scientific research.</p></div>
+          <a class="btn btn-dark" href="mailto:saqib.zafar@unitus.it?subject=ISENSE%20Dataset%20Access%20Request&amp;body=Full%20name%3A%0AInstitution%3A%0AInstitutional%20email%3A%0AResearch%20project%3A%0AIntended%20dataset%20use%3A%0A%0AI%20would%20like%20to%20request%20access%20to%20the%20ISENSE%20Dataset%20and%20review%20the%20applicable%20agreement.">Email an access request <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="license">
+      <div class="container">
+        <div class="license-box">
+          <div>
+            <div class="section-kicker">04 / Usage &amp; privacy</div>
+            <h2>Research access with clear safeguards</h2>
+            <p>The current ISENSE license and disclaimer permits approved, non-commercial academic and scientific research. Other uses require prior written authorization from the authorized dataset provider.</p>
+            <div class="license-actions"><a class="btn btn-primary" href="license.html">Read the full license <span aria-hidden="true">↗</span></a></div>
+            <div class="license-clarify">The website notice is not a substitute for an access agreement formally accepted by the researcher.</div>
+          </div>
+          <ul class="policy-points" aria-label="Key license protections">
+            <li><span class="bullet" aria-hidden="true">✓</span><span>Keep the original dataset, including its annotations and labels, unchanged.</span></li>
+            <li><span class="bullet" aria-hidden="true">✓</span><span>Use separate working copies only for authorized research preprocessing.</span></li>
+            <li><span class="bullet" aria-hidden="true">✓</span><span>Do not redistribute dataset files without written permission.</span></li>
+            <li><span class="bullet" aria-hidden="true">✓</span><span>Respect participant privacy; do not attempt unauthorized identification or contact.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="citation">
+      <div class="container">
+        <div class="section-top"><div class="section-kicker">05 / Cite ISENSE</div><h2>Attribution and publications</h2><p class="section-intro">Please acknowledge the ISENSE Dataset when publishing research that uses it. The official citation should be added after the dataset publication or DOI is confirmed.</p></div>
+        <div class="citation-inner"><h3>Official dataset citation</h3><p><strong>[Add the verified ISENSE paper, dataset DOI, or recommended citation here.]</strong></p><code>Example format: Author(s). “ISENSE Dataset: [Official Title].” Journal / Repository, Year. DOI.</code></div>
+      </div>
+    </section>
+
+    <section class="section soft" id="team">
+      <div class="container">
+        <div class="section-top"><div class="section-kicker">06 / Research team</div><h2>Dataset team</h2><p class="section-intro">ISENSE Dataset owners and research contributors, as provided for this website.</p></div>
+        <div class="team-grid">
+          <article class="person"><div class="avatar" aria-hidden="true">SR</div><div><h3>Professor Stefano Rossi</h3><span>Dataset owner</span></div></article>
+          <article class="person"><div class="avatar" aria-hidden="true">JT</div><div><h3>Dr. Juri Taborri</h3><span>Dataset owner</span></div></article>
+          <article class="person"><div class="avatar" aria-hidden="true">SZ</div><div><h3>Dr. Saqib Zafar</h3><span>Dataset owner</span></div></article>
+        </div>
+        <div class="affiliation"><strong>Affiliation:</strong> Laboratorio di Misure Industriali e Biomeccanica Sperimentale, University of Tuscia, 01100 Viterbo, Italy.</div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-panel">
+          <div><div class="section-kicker">Questions &amp; rights concerns</div><h2>Contact the ISENSE team</h2><p>For research access, dataset questions, or concerns about copyright and participant privacy, contact Dr. Saqib Zafar at <a class="email" href="mailto:saqib.zafar@unitus.it">saqib.zafar@unitus.it</a>.</p></div>
+          <a class="btn btn-dark" href="mailto:saqib.zafar@unitus.it?subject=ISENSE%20Dataset%20Inquiry">Contact us <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>ISENSE Dataset · University of Tuscia, Viterbo, Italy</span>
+      <div class="footer-links"><a href="#overview">Back to top ↑</a><a href="license.html">License &amp; Disclaimer</a></div>
+    </div>
+  </footer>
+</body>
+</html>
